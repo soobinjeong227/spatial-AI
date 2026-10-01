@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Spatial AI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neighborhood</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
 </head>
 <body>
-  <h1>Spatial AI</h1>
-  <p>This is my Spatial AI project page.</p>
+  <div id="scene"></div>
+
+  <header id="toolbar" aria-label="Tools"></header>
+
+  <aside id="side">
+    <section id="stats" class="panel"></section>
+    <section id="inspector" class="panel"></section>
+  </aside>
+
+  <section id="rules" class="panel">
+    <button id="rules-toggle">Rules</button>
+    <ol>
+      <li><b>One structure per lot.</b> Streets can't hold structures.</li>
+      <li><b>Zoning:</b> houses go on residential lots, shops on commercial lots, parks on green lots.</li>
+      <li><b>Street access:</b> a structure's lot must touch a street.</li>
+      <li>You can't remove a street if a neighbor would lose its only access.</li>
+      <li>Only an empty lot can be rezoned.</li>
+      <li>Houses and shops have 1–3 floors.</li>
+      <li>A house holds 2 residents per floor.</li>
+      <li>When a house is demolished, its residents move to the nearest house with room, or leave.</li>
+      <li>A shop offers 3 jobs per floor.</li>
+      <li>Residents only work at shops the streets connect to their home.</li>
+      <li>A park holds at most 4 trees.</li>
+    </ol>
+  </section>
+
+  <footer id="status"></footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
