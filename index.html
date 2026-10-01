@@ -17,31 +17,39 @@
 <body>
   <div id="scene"></div>
 
-  <header id="toolbar" aria-label="Tools"></header>
+  <header id="toolbar" aria-label="Toolbar"></header>
 
-  <aside id="side">
-    <section id="stats" class="panel"></section>
-    <section id="inspector" class="panel"></section>
+  <aside id="left">
+    <section id="rules" class="panel open">
+      <button id="rules-toggle">Semantic model</button>
+      <div class="body">
+        <p class="model">
+          <b>HUMAN</b> <span class="rel">PASSING →</span> <b>STREET</b> <span class="rel">← OCCUPY</span> <b>STREET_FURNITURE</b>
+        </p>
+        <ol>
+          <li>A human must stay on a traversable surface: a sidewalk, or a crosswalk where the street has one.</li>
+          <li>Furniture with <code>obstacle_status = true</code> is an obstacle (red footprint). Furniture with <code>false</code> can be walked over (green footprint).</li>
+          <li>Movement responds to street geometry (routes follow sidewalks and turn at corners), surface condition (speed), traffic direction (wait for oncoming cars) and crosswalk presence (the only places to cross).</li>
+        </ol>
+        <div class="legend">
+          <span><i style="background:#34c759"></i>moving</span>
+          <span><i style="background:#ff9500"></i>avoiding</span>
+          <span><i style="background:#af52de"></i>rerouting</span>
+          <span><i style="background:#ffcc00"></i>waiting</span>
+          <span><i style="background:#5ac8fa"></i>turning</span>
+          <span><i style="background:#ff3b30"></i>stopped</span>
+        </div>
+      </div>
+    </section>
+    <section id="log" class="panel">
+      <h2>Action log</h2>
+      <ul id="log-list"></ul>
+    </section>
   </aside>
 
-  <section id="rules" class="panel">
-    <button id="rules-toggle">Rules</button>
-    <ol>
-      <li><b>One structure per lot.</b> Streets can't hold structures.</li>
-      <li><b>Zoning:</b> houses go on residential lots, shops on commercial lots, parks on green lots.</li>
-      <li><b>Street access:</b> a structure's lot must touch a street.</li>
-      <li>You can't remove a street if a neighbor would lose its only access.</li>
-      <li>Only an empty lot can be rezoned.</li>
-      <li>Houses and shops have 1–3 floors.</li>
-      <li>A house holds 2 residents per floor.</li>
-      <li>When a house is demolished, its residents move to the nearest house with room, or leave.</li>
-      <li>A shop offers 3 jobs per floor.</li>
-      <li>Residents only work at shops the streets connect to their home.</li>
-      <li>A park holds at most 4 trees.</li>
-    </ol>
-  </section>
+  <aside id="inspector" class="panel"></aside>
 
-  <footer id="status"></footer>
+  <footer id="status">Click a human, furniture or a street to inspect it. Drag to orbit, scroll to zoom.</footer>
   <div id="toast" role="status" aria-live="polite"></div>
 
   <script type="module" src="js/main.js"></script>
